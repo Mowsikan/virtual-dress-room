@@ -3,11 +3,22 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+import { 
+  Camera, 
+  Share2, 
+  RotateCw, 
+  ZoomIn, 
+  ZoomOut, 
+  FlipHorizontal 
+} from "lucide-react";
+import { Slider } from "@/components/ui/slider";
 
 const TryOn = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [cameraActive, setCameraActive] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [transparency, setTransparency] = useState([100]);
+  const [selectedDress, setSelectedDress] = useState(0);
 
   useEffect(() => {
     initializeCamera();
@@ -53,8 +64,9 @@ const TryOn = () => {
           <h1 className="text-2xl font-semibold text-primary">Virtual Try-On Studio</h1>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Main Video Area */}
+          <div className="lg:col-span-8">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -84,92 +96,106 @@ const TryOn = () => {
                   <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
                 </div>
               )}
+
+              {/* Floating Camera Switch Button */}
+              <button
+                onClick={toggleCamera}
+                className="absolute top-4 right-4 p-3 bg-white/90 rounded-full shadow-lg hover:bg-white transition-colors"
+              >
+                <Camera className="h-6 w-6 text-primary" />
+              </button>
             </motion.div>
 
-            {/* Tutorial Tips */}
+            {/* Controls Bar */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4"
+              transition={{ delay: 0.3 }}
+              className="mt-6 bg-white p-4 rounded-xl shadow-lg flex items-center justify-between"
             >
-              {tips.map((tip, index) => (
-                <div key={index} className="bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow">
-                  <p className="text-primary/80 text-sm">{tip}</p>
-                </div>
-              ))}
+              <div className="flex space-x-4">
+                <button className="p-2 hover:bg-gray-100 rounded-lg">
+                  <RotateCw className="h-6 w-6 text-primary" />
+                </button>
+                <button className="p-2 hover:bg-gray-100 rounded-lg">
+                  <ZoomIn className="h-6 w-6 text-primary" />
+                </button>
+                <button className="p-2 hover:bg-gray-100 rounded-lg">
+                  <ZoomOut className="h-6 w-6 text-primary" />
+                </button>
+                <button className="p-2 hover:bg-gray-100 rounded-lg">
+                  <FlipHorizontal className="h-6 w-6 text-primary" />
+                </button>
+              </div>
+              <button
+                onClick={() => toast.success("Image captured and ready to share!")}
+                className="flex items-center space-x-2 px-4 py-2 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors"
+              >
+                <Share2 className="h-5 w-5" />
+                <span>Share</span>
+              </button>
             </motion.div>
           </div>
 
-          <div className="lg:col-span-1">
+          {/* Right Side Panel */}
+          <div className="lg:col-span-4 space-y-6">
+            {/* Dress Selection */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               className="bg-white p-6 rounded-2xl shadow-lg"
             >
-              <h2 className="text-xl font-semibold mb-6">Customization Controls</h2>
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-sm font-medium text-gray-600 mb-3">Camera Options</h3>
+              <h3 className="text-lg font-semibold mb-4">Select Dress</h3>
+              <div className="space-y-4">
+                {dresses.map((dress, index) => (
                   <button
-                    onClick={toggleCamera}
-                    className="w-full px-4 py-3 bg-primary text-white rounded-lg hover:bg-opacity-90 transition-colors"
+                    key={index}
+                    onClick={() => setSelectedDress(index)}
+                    className={`w-full p-4 rounded-lg border-2 transition-all ${
+                      selectedDress === index
+                        ? "border-accent bg-accent/5"
+                        : "border-gray-200 hover:border-accent/50"
+                    }`}
                   >
-                    Switch Camera
+                    <h4 className="font-medium">{dress.name}</h4>
+                    <p className="text-sm text-gray-600">{dress.style}</p>
                   </button>
-                </div>
-
-                <div>
-                  <h3 className="text-sm font-medium text-gray-600 mb-3">Capture Options</h3>
-                  <button
-                    onClick={() => toast.success("Screenshot captured!")}
-                    className="w-full px-4 py-3 bg-accent text-white rounded-lg hover:bg-opacity-90 transition-colors mb-3"
-                  >
-                    Capture Screenshot
-                  </button>
-                  <button
-                    onClick={() => toast.info("Starting recording...")}
-                    className="w-full px-4 py-3 bg-accent/80 text-white rounded-lg hover:bg-opacity-90 transition-colors"
-                  >
-                    Record Video
-                  </button>
-                </div>
-
-                <div>
-                  <h3 className="text-sm font-medium text-gray-600 mb-3">Try-On Settings</h3>
-                  <button
-                    onClick={() => toast.info("Resetting position...")}
-                    className="w-full px-4 py-3 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors mb-3"
-                  >
-                    Reset Position
-                  </button>
-                  <button
-                    onClick={() => toast.info("Opening style gallery...")}
-                    className="w-full px-4 py-3 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors"
-                  >
-                    Browse Styles
-                  </button>
-                </div>
+                ))}
               </div>
             </motion.div>
 
-            {/* Quick Tips */}
+            {/* Transparency Control */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
-              className="mt-6 bg-primary/5 p-6 rounded-2xl"
+              className="bg-white p-6 rounded-2xl shadow-lg"
             >
-              <h3 className="font-semibold mb-3">Quick Tips</h3>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li>• Ensure good lighting for best results</li>
-                <li>• Stand 2-3 feet away from the camera</li>
-                <li>• Keep your whole body in frame</li>
-                <li>• Try different poses to see all angles</li>
-              </ul>
+              <h3 className="text-lg font-semibold mb-4">Transparency</h3>
+              <Slider
+                value={transparency}
+                onValueChange={setTransparency}
+                max={100}
+                step={1}
+                className="w-full"
+              />
             </motion.div>
           </div>
         </div>
+
+        {/* Tutorial Tips */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4"
+        >
+          {tips.map((tip, index) => (
+            <div key={index} className="bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow">
+              <p className="text-primary/80 text-sm">{tip}</p>
+            </div>
+          ))}
+        </motion.div>
       </div>
     </div>
   );
@@ -179,6 +205,14 @@ const tips = [
   "Move naturally to see how the clothes flow with your body",
   "Use gestures to adjust fit and style in real-time",
   "Share your look with friends for instant feedback",
+];
+
+const dresses = [
+  { name: "Summer Breeze Dress", style: "Casual Summer Wear" },
+  { name: "Evening Elegance", style: "Formal Evening Gown" },
+  { name: "Urban Chic", style: "Smart Casual" },
+  { name: "Bohemian Dream", style: "Boho Style" },
+  { name: "Classic Grace", style: "Timeless Classic" },
 ];
 
 export default TryOn;
