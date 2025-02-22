@@ -18,13 +18,13 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.label}
-                href={item.href}
+                to={item.href}
                 className="text-gray-600 hover:text-primary transition-colors duration-200"
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
             <Link
               to="/try-on"
@@ -55,14 +55,14 @@ const Navigation = () => {
           >
             <div className="container mx-auto px-4 py-4 space-y-4">
               {navItems.map((item) => (
-                <a
+                <Link
                   key={item.label}
-                  href={item.href}
+                  to={item.href}
                   className="block text-gray-600 hover:text-primary transition-colors duration-200"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
               <Link
                 to="/try-on"
@@ -80,9 +80,9 @@ const Navigation = () => {
 };
 
 const navItems = [
-  { label: "Features", href: "#features" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Benefits", href: "#benefits" },
+  { label: "Features", href: "/features" },
+  { label: "How It Works", href: "/how-it-works" },
+  { label: "Benefits", href: "/benefits" },
 ];
 
 export default Navigation;
