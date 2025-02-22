@@ -5,11 +5,57 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-secondary to-white">
+    <div className="min-h-screen bg-gradient-to-b from-secondary to-white relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          className="absolute w-[500px] h-[500px] rounded-full bg-accent/5 blur-3xl"
+          animate={{
+            x: [-200, 200],
+            y: [-200, 200],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+          style={{ top: "10%", left: "20%" }}
+        />
+        <motion.div
+          className="absolute w-[400px] h-[400px] rounded-full bg-primary/5 blur-3xl"
+          animate={{
+            x: [200, -200],
+            y: [200, -200],
+            scale: [1.2, 1, 1.2],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+          style={{ top: "30%", right: "10%" }}
+        />
+        <motion.div
+          className="absolute w-[300px] h-[300px] rounded-full bg-accent/10 blur-3xl"
+          animate={{
+            x: [-150, 150],
+            y: [100, -100],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+          style={{ bottom: "20%", left: "30%" }}
+        />
+      </div>
+
       <Navigation />
       
       {/* Hero Section */}
-      <div className="container mx-auto px-4 pt-24">
+      <div className="container mx-auto px-4 pt-24 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
