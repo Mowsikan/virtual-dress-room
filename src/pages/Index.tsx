@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navigation from "../components/Navigation";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Circle, Square, Star, Sparkle } from "lucide-react";
 
 const Index = () => {
   return (
@@ -220,6 +221,101 @@ const Index = () => {
           }}
           style={{ bottom: "5%", right: "30%" }}
         />
+
+        {/* Floating Vector Icons */}
+        <motion.div
+          className="absolute"
+          animate={{
+            y: [-20, 20],
+            opacity: [0.3, 0.7, 0.3],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "easeInOut",
+          }}
+          style={{ top: "15%", left: "10%" }}
+        >
+          <Star className="w-8 h-8 text-[#8B5CF6]/30" />
+        </motion.div>
+
+        <motion.div
+          className="absolute"
+          animate={{
+            y: [20, -20],
+            opacity: [0.2, 0.5, 0.2],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "easeInOut",
+          }}
+          style={{ top: "25%", right: "15%" }}
+        >
+          <Circle className="w-6 h-6 text-[#D946EF]/30" />
+        </motion.div>
+
+        <motion.div
+          className="absolute"
+          animate={{
+            rotate: [0, 180],
+            scale: [1, 1.2, 1],
+            opacity: [0.2, 0.6, 0.2],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "easeInOut",
+          }}
+          style={{ bottom: "20%", left: "20%" }}
+        >
+          <Square className="w-10 h-10 text-[#F97316]/30" />
+        </motion.div>
+
+        <motion.div
+          className="absolute"
+          animate={{
+            scale: [1, 1.5, 1],
+            opacity: [0.3, 0.8, 0.3],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "easeInOut",
+          }}
+          style={{ bottom: "30%", right: "25%" }}
+        >
+          <Sparkle className="w-8 h-8 text-[#0EA5E9]/30" />
+        </motion.div>
+
+        {/* Additional Sparkles */}
+        {Array.from({ length: 5 }).map((_, i) => (
+          <motion.div
+            key={`sparkle-${i}`}
+            className="absolute"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.2, 0.5, 0.2],
+            }}
+            transition={{
+              duration: 2,
+              delay: i * 0.5,
+              repeat: Infinity,
+              repeatType: "reverse",
+              ease: "easeInOut",
+            }}
+            style={{
+              top: `${Math.random() * 70 + 15}%`,
+              left: `${Math.random() * 70 + 15}%`,
+            }}
+          >
+            <Sparkle className="w-4 h-4 text-[#8B5CF6]/20" />
+          </motion.div>
+        ))}
       </div>
 
       <Navigation />
