@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navigation from "../components/Navigation";
@@ -6,49 +7,115 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-secondary to-white relative overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
+      {/* High-end Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden bg-gradient-to-br from-[#8B5CF6]/5 via-transparent to-[#D946EF]/5">
+        {/* Floating geometric shapes */}
         <motion.div
-          className="absolute w-[500px] h-[500px] rounded-full bg-accent/5 blur-3xl"
+          className="absolute w-[600px] h-[600px] rounded-full bg-[#8B5CF6]/10 mix-blend-multiply blur-[80px]"
           animate={{
-            x: [-200, 200],
-            y: [-200, 200],
-            scale: [1, 1.2, 1],
+            x: [-100, 100],
+            y: [-50, 50],
+            scale: [1, 1.05, 1],
+            rotate: [0, 90],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "easeInOut",
+          }}
+          style={{ top: "0%", left: "10%" }}
+        />
+        <motion.div
+          className="absolute w-[500px] h-[500px] rounded-full bg-[#D946EF]/10 mix-blend-multiply blur-[60px]"
+          animate={{
+            x: [100, -100],
+            y: [0, 100],
+            scale: [1.1, 1, 1.1],
+            rotate: [45, -45],
           }}
           transition={{
             duration: 15,
             repeat: Infinity,
             repeatType: "reverse",
+            ease: "easeInOut",
           }}
-          style={{ top: "10%", left: "20%" }}
+          style={{ top: "20%", right: "5%" }}
         />
         <motion.div
-          className="absolute w-[400px] h-[400px] rounded-full bg-primary/5 blur-3xl"
+          className="absolute w-[400px] h-[400px] rounded-full bg-[#F97316]/10 mix-blend-multiply blur-[70px]"
           animate={{
-            x: [200, -200],
-            y: [200, -200],
-            scale: [1.2, 1, 1.2],
+            x: [-50, 50],
+            y: [50, -50],
+            scale: [1, 1.1, 1],
+            rotate: [-45, 45],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "easeInOut",
+          }}
+          style={{ bottom: "10%", left: "20%" }}
+        />
+        
+        {/* Decorative lines */}
+        <motion.div
+          className="absolute w-[1px] h-[200px] bg-gradient-to-b from-transparent via-primary/20 to-transparent"
+          animate={{
+            height: ["200px", "400px", "200px"],
+            opacity: [0.3, 0.6, 0.3],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "easeInOut",
+          }}
+          style={{ top: "20%", left: "30%" }}
+        />
+        <motion.div
+          className="absolute w-[1px] h-[300px] bg-gradient-to-b from-transparent via-accent/20 to-transparent"
+          animate={{
+            height: ["300px", "500px", "300px"],
+            opacity: [0.2, 0.5, 0.2],
           }}
           transition={{
             duration: 12,
             repeat: Infinity,
             repeatType: "reverse",
+            ease: "easeInOut",
           }}
-          style={{ top: "30%", right: "10%" }}
+          style={{ top: "10%", right: "35%" }}
         />
+
+        {/* Floating particles */}
         <motion.div
-          className="absolute w-[300px] h-[300px] rounded-full bg-accent/10 blur-3xl"
+          className="absolute w-2 h-2 rounded-full bg-[#0EA5E9]/30 blur-sm"
           animate={{
-            x: [-150, 150],
-            y: [100, -100],
-            scale: [1, 1.1, 1],
+            y: [0, -200],
+            opacity: [0, 1, 0],
           }}
           transition={{
             duration: 10,
             repeat: Infinity,
-            repeatType: "reverse",
+            ease: "easeInOut",
           }}
-          style={{ bottom: "20%", left: "30%" }}
+          style={{ bottom: "10%", left: "40%" }}
+        />
+        <motion.div
+          className="absolute w-3 h-3 rounded-full bg-accent/30 blur-sm"
+          animate={{
+            y: [0, -300],
+            opacity: [0, 1, 0],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+          style={{ bottom: "5%", right: "30%" }}
         />
       </div>
 
