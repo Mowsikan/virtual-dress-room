@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navigation from "../components/Navigation";
@@ -59,6 +58,110 @@ const Index = () => {
           style={{ bottom: "10%", left: "20%" }}
         />
         
+        {/* Vector Grid */}
+        <div className="absolute inset-0 grid grid-cols-12 grid-rows-8 opacity-20">
+          {Array.from({ length: 96 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="border-[0.5px] border-primary/10"
+              animate={{
+                opacity: [0.3, 0.6, 0.3],
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                duration: 4,
+                delay: i * 0.02,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Vector Lines */}
+        <motion.div
+          className="absolute h-[1px] w-[200px] bg-gradient-to-r from-transparent via-primary/30 to-transparent transform -rotate-45"
+          animate={{
+            x: [-200, window.innerWidth],
+            y: [-100, window.innerHeight],
+            opacity: [0, 1, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          style={{ top: "20%", left: "-10%" }}
+        />
+        <motion.div
+          className="absolute h-[1px] w-[300px] bg-gradient-to-r from-transparent via-accent/30 to-transparent transform rotate-45"
+          animate={{
+            x: [-300, window.innerWidth + 300],
+            y: [window.innerHeight, -100],
+            opacity: [0, 1, 0],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "linear",
+            delay: 2,
+          }}
+          style={{ top: "40%", left: "-15%" }}
+        />
+
+        {/* Vector Circles */}
+        <motion.div
+          className="absolute w-[400px] h-[400px] border border-primary/10 rounded-full"
+          animate={{
+            scale: [1, 1.5],
+            opacity: [0.5, 0],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeOut",
+          }}
+          style={{ top: "30%", left: "50%", transform: "translate(-50%, -50%)" }}
+        />
+        <motion.div
+          className="absolute w-[200px] h-[200px] border border-accent/10 rounded-full"
+          animate={{
+            scale: [1, 2],
+            opacity: [0.5, 0],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeOut",
+            delay: 1,
+          }}
+          style={{ bottom: "20%", right: "20%" }}
+        />
+
+        {/* Vector Dots Grid */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="grid grid-cols-6 gap-8 opacity-30">
+            {Array.from({ length: 36 }).map((_, i) => (
+              <motion.div
+                key={i}
+                className="w-1 h-1 bg-primary/50 rounded-full"
+                animate={{
+                  scale: [1, 1.5, 1],
+                  opacity: [0.3, 0.7, 0.3],
+                }}
+                transition={{
+                  duration: 3,
+                  delay: i * 0.1,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
         {/* Decorative lines */}
         <motion.div
           className="absolute w-[1px] h-[200px] bg-gradient-to-b from-transparent via-primary/20 to-transparent"
